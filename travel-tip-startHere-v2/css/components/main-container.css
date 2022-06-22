@@ -1,5 +1,5 @@
 .main-container {
-    margin-top: 75px;
+    margin-top: 45px;
 
 }
 
@@ -11,8 +11,11 @@
 .location-save-weather {
     flex-direction: column;
     flex-grow: 1;
-    padding-left: 20px;
-    background-color: #2b292971;
+    margin-left: 20px;
+    background-color:#87a1bdb9;
+    -webkit-box-shadow: 0px 1px 10px -1px #2b2929;
+    box-shadow: 0px 1px 8px -1px #000000;
+
 }
 
 .weather {
@@ -20,8 +23,9 @@
     border-radius: 2px solid black;
 
 }
-
+.main-container button
 .location-table {
+    cursor: pointer;
     flex-grow: 1;
 }
 
@@ -29,11 +33,27 @@ table {
     width: 100%;
     border-collapse: collapse;
 }
-
-tr:nth-child(odd) {
-    background-color: rgb(198, 202, 182);
+tr{
+    -webkit-box-shadow: 4px 12px 33px -8px #676565; 
+    box-shadow: 4px 12px 33px -8px #474747;}
+/* tr:nth-child(odd) {
+    background-color: rgba(118, 128, 133, 0.468);
 }
 
 tr:nth-child(even) {
-    background-color: rgb(186, 187, 201);
+    background-color: rgba(174, 184, 201, 0.683);
+}
+ */.delete-place{
+    cursor: pointer;
+    background-color: rgba(218, 60, 60, 0.797);
+    border: none;
+}
+.btn-pan{
+    cursor: pointer;
+    border:none ;
+    background-color: rgb(130, 195, 130);
+    
+}
+.location-name{
+    padding-left: 8px;
 }

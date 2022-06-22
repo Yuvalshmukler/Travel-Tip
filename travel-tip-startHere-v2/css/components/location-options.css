@@ -1,0 +1,17 @@
+
+
+.location-options button{
+    cursor: pointer;
+    font-family: 'Questrial', sans-serif;
+    font-weight: 400;
+    background: rgb(155, 172, 176);
+    /* background: rgba(109, 152, 177, 0.861); */
+    height: 35px;
+    margin-top: 55px;
+    border: none;
+  /*   color: rgb(249, 249, 249); */
+    margin-right: 5px;
+}
+.location-options button:hover{
+    background-color:  rgb(116, 215, 235);
+}

@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+
 /* SETUP */
 @import 'setup/vars.css';
 
@@ -10,6 +13,8 @@
 /* COMPONENTS */
 @import './components/main-header.css'; 
 @import './components/main-container.css'; 
+@import './components/location-options.css'; 
+@import './components/footer.css'; 
 
 
 /* MQ */

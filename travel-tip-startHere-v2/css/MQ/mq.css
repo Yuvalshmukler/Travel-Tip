@@ -2,7 +2,7 @@
     .main-layout {
         width: 700px;
     }
-    
+
 
 }
 
@@ -13,35 +13,58 @@
 
     .main-container {
         flex-direction: column;
+        margin-top: 25px;
+    }
+
+    .main-header {
+        width: 100%;
     }
 
     .location-save-weather {
         padding: 0;
     }
-    #map{
+
+    #map {
         width: 100% !important;
+    }
+
+    .location-save-weather {
+        padding-bottom: 15px;
+        margin-left: 0;
+        margin-top: 15px;
+    }
+
+    .location-options button {
+        margin-top: 8px;
+        justify-content: center;
     }
 
 }
 
 @media (max-width:520px) {
     .main-layout {
-        max-width: 80%;
+        max-width: 300px;
     }
 
-    .main-header {
+    .mobile-layout {
+        width: 100%;
         flex-direction: column;
         margin-bottom: 35px;
     }
+    .main-nav{
+        margin-top: 15px;
+        margin-bottom: 30px;
 
+    }
+   input{
+        background-color: white;
+    }
     .main-container {
         max-width: 80%;
     }
-
-    .location-options {
-        flex-direction: column;
+    .location-options button{
+        background-color: rgba(109, 152, 177, 0.717);
     }
-
 }
 
 

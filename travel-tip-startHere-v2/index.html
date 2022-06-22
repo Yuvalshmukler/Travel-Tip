@@ -9,38 +9,40 @@
 </head>
 
 <body>
-    <header class="main-header flex space-between main-layout">
-        <h1>TravelTip✈</h1>
-        <form onsubmit="onGetAddress(event)" class="main-nav flex align-items">
-            <input type="text" placeholder="Enter Location">
-            <button>GO</button> 
-        </form >
+    <header class="main-header ">
+        <div class=" main-layout space-between flex">
+
+            <h1>TravelTip✈</h1>
+            <form onsubmit="onGetAddress(event)" class="main-nav flex align-items">
+                <input type="text" placeholder="Enter any Location">
+                <button class="search-btn">GO!</button>
+            </form>
+        </div>
     </header>
-    <div class="location-options flex space-between main-layout align-items">
-        <p>
-            Location:<span class="user-pos"></span>
-        </p>
-        <section>
-            <button onclick="onGetUserPos()" class="btn-user-pos">My Location</button>
-            <button onclick="onCopyLocation()">Copy Location</button>
-            <button onclick="onAddMarker()" class="btn-add-marker">Add Marker</button>
-            <button onclick="onGetLocs()" class="btn-get-locs">Show Locations</button>
+    <div class="location-options flex main-layout align-items">
+        <!--<p>Location:<span class="user-pos"></span></p>-->
+        <button onclick="onGetUserPos()" class="btn-user-pos">My Location</button>
+        <button onclick="onCopyLocation()">Copy Location</button>
+        <button onclick="onAddMarker()" class="btn-add-marker">Add Marker</button>
+        <button onclick="onGetLocs()" class="btn-get-locs">Show Locations</button>
         </section>
     </div>
     <main class="main-container main-layout flex">
         <div id="map" style="width: 55%; height: 400px;"></div>
         <div class="location-save-weather flex">
-            <div class="weather">
-                <h3 class="text-align">Weather today:</h3>
-            </div>
+
+            <!--<div class="weather"><h3 class="text-align">Weather today:</h3></div>-->
             <div class="location-table">
                 <h3 class="text-align">My locations:</h3>
                 <div class="location-list"></div>
-                <!-- <button onclick="onPanTo()" class="btn-pan">go</button> -->
+                <!--<button onclick="onPanTo()" class="btn-pan">go</button> -->
             </div>
         </div>
     </main>
-
+    <footer class="text-align">
+        <h2>TravelTip✈</h2>
+        © Coffeeright - TravelTip - CaMay2022 - Kai Nagar & Yuval Shmukler
+    </footer>
     <script src="js/lib/swal.js"></script>
     <script src="js/lib/axios.js"></script>
     <script type="module" src="js/app.controller.js"></script>
