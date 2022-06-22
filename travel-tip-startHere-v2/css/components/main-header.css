@@ -1,5 +1,4 @@
-.main-nav{
-    background-color: bisque;
-    display: flex;
-    justify-content: center;
+.main-nav {
+    justify-items: center;
 }
+

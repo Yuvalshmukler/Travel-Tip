@@ -3,8 +3,14 @@
 /* BASE */
 @import 'basic/base.css';
 @import 'basic/helpers.css';
+@import 'basic/layout.css';
+
 
 /* COMPONENTS */
 @import './components/main-header.css'; 
 @import './components/main-container.css'; 
+
+
+/* MQ */
+@import './MQ/mq.css'; 
 

@@ -8,6 +8,7 @@ window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
 
 function onInit() {
+    onGetLocs()
     mapService.initMap()
         .then(() => {
             console.log('Map is ready');
@@ -32,7 +33,11 @@ function onGetLocs() {
     locService.getLocs()
         .then(locs => {
             console.log('Locations:', locs)
-            document.querySelector('.locs').innerText = JSON.stringify(locs)
+            var strHTML = locs.map(loc => {
+                return `<div>${loc.name}</div>`
+            })
+
+            document.querySelector('.location-list').innerHTML = strHTML.join('')
         })
 }
 
@@ -42,6 +47,7 @@ function onGetUserPos() {
             console.log('User position is:', pos.coords);
             document.querySelector('.user-pos').innerText =
                 `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
+               /* ` getLocation(${pos.coords.latitude},  ${pos.coords.longitude})."long_name"` */
         })
         .catch(err => {
             console.log('err!!!', err);

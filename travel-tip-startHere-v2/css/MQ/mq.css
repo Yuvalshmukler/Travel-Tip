@@ -1,0 +1,64 @@
+
+@media (max-width:1000px) {
+    .main-layout{
+        width: 700px;
+    }
+
+}
+
+@media (max-width:730px) {
+    .main-layout{
+        width: 500px;
+    }
+    .main-container{
+        flex-direction: column;
+    }
+    .location-save-weather{
+        padding: 0;
+    }
+
+
+}
+@media (max-width:520px){
+    .main-layout{
+        max-width: 80%;
+    }
+    .main-header{
+        flex-direction: column;
+        margin-bottom: 35px;
+    }
+    .main-container{
+        max-width: 80%;
+    }
+    .location-options{
+        flex-direction: column;
+    }
+
+}
+
+
+
+/* Desktop first */
+
+/* @media (max-width:900px){
+    body{
+        background-color: #fff;
+    }
+}
+@media (max-width:600px){
+    body{
+        background-color: #fff;
+    }
+}
+
+/* Mobile First
+@media (min-width:600px) {
+    body{
+        background-color: #fff;
+    }
+}
+@media (min-width:900px) {
+    body{
+        background-color: #fff;
+    }
+} */

@@ -5,35 +5,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
-    <title>TravelTip</title>
+    <title>Travel Tip</title>
 </head>
 
 <body>
     <header class="main-header flex space-between main-layout">
         <h1>TravelTip</h1>
-        <div class="main-nav">
+        <div class="main-nav flex align-items">
             <input type="text" placeholder="Enter Location">
             <button onclick="onEnterLocation()">GO</button> <!-- for later -->
             <button onclick="onGetUserPos()" class="btn-user-pos">My Location</button>
         </div>
     </header>
-    <div class="location-options main-layout">
+    <div class="location-options flex space-between main-layout align-items">
         <p>
-            Location: <span class="user-pos"></span>
+            Location:<span class="user-pos"></span>
+        </p>
+        <section>
             <button onclick="onCopyLocation()">Copy Location</button>
             <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button>
             <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
-        </p>
+        </section>
     </div>
     <main class="main-container main-layout flex">
-        <div id="map" style="width: 40%; height: 400px;"></div>
+        <div id="map" style="width: 55%; height: 400px;"></div>
         <div class="location-save-weather flex">
-            <div class="weather"></div>
+            <div class="weather">
+                <h3 class="text-align">Weather today:</h3>
+            </div>
             <div class="location-table">
-                <button onclick="onPanTo()" class="btn-pan">Pan Map to Tokyo</button>
+                <h3 class="text-align">My locations:</h3>
+                <div class="location-list"></div>
+                <!-- <button onclick="onPanTo()" class="btn-pan">go</button> -->
             </div>
         </div>
     </main>
+
+    <script src="js/lib/swal.js"></script>
+    <script src="js/lib/axios.js"></script>
     <script type="module" src="js/app.controller.js"></script>
 </body>
 

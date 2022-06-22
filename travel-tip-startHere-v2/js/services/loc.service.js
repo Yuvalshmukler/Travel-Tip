@@ -13,6 +13,7 @@ const STORAGE_KEY = 'SavedLocs'
 const locs = storageService.load(STORAGE_KEY) || []
 
 function getLocs() {
+    console.log(locs);
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve(locs);
@@ -29,6 +30,7 @@ function addNewLoc(location) {
         createdAt: Date.now(),
         updatedAt: Date.now(),
     })
+    console.log(locs);
     storageService.save(STORAGE_KEY, locs)
 }
 
