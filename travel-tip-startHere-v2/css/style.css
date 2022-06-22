@@ -1,4 +1,5 @@
 /* SETUP */
+@import 'setup/vars.css';
 
 /* BASE */
 @import 'basic/base.css';

@@ -1,36 +1,44 @@
-
 @media (max-width:1000px) {
-    .main-layout{
+    .main-layout {
         width: 700px;
     }
+    
 
 }
 
 @media (max-width:730px) {
-    .main-layout{
+    .main-layout {
         width: 500px;
     }
-    .main-container{
+
+    .main-container {
         flex-direction: column;
     }
-    .location-save-weather{
+
+    .location-save-weather {
         padding: 0;
     }
-
+    #map{
+        width: 100% !important;
+    }
 
 }
-@media (max-width:520px){
-    .main-layout{
+
+@media (max-width:520px) {
+    .main-layout {
         max-width: 80%;
     }
-    .main-header{
+
+    .main-header {
         flex-direction: column;
         margin-bottom: 35px;
     }
-    .main-container{
+
+    .main-container {
         max-width: 80%;
     }
-    .location-options{
+
+    .location-options {
         flex-direction: column;
     }
 

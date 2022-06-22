@@ -6,6 +6,9 @@ window.onAddMarker = onAddMarker;
 window.onPanTo = onPanTo;
 window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
+window.onGetAddress = onGetAddress;
+
+
 
 function onInit() {
     onGetLocs()
@@ -25,29 +28,52 @@ function getPosition() {
 }
 
 function onAddMarker() {
-    console.log('Adding a marker');
-    mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
+    locService.getAddress()
+        .then(res => mapService.addMarker(res))
+        .catch(() => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+                footer: 'You should look for a Place!'
+            })
+        })
 }
 
 function onGetLocs() {
     locService.getLocs()
         .then(locs => {
+            var strHtml = `<table>
+                        <tbody>`
+            console.log(locs);
             console.log('Locations:', locs)
-            var strHTML = locs.map(loc => {
-                return `<div>${loc.name}</div>`
-            })
+            locs.map(loc =>
+                strHtml += `
+                <tr>
+                    <td class="location-name">${loc.name}</td>
+                    <td class="location-Address">${loc.address}  </td>
+                    <td><button onclick="onPanTo(${loc.lat},${loc.lng})" class="btn-pan">Go</button></td>
+                    <td><button class="delete-place" onclick="onRemoveLoc(${loc.id})">X</button></td>
+                    </td>
+                </tr>
+                `
+            )
+            strHtml += `</tbody>
+            </table>`
 
-            document.querySelector('.location-list').innerHTML = strHTML.join('')
+            locs.forEach(loc => mapService.addMarker({ lat: loc.lat, lng: loc.lng }))
+            document.querySelector('.location-list').innerHTML = strHtml
         })
 }
+
+
 
 function onGetUserPos() {
     getPosition()
         .then(pos => {
-            console.log('User position is:', pos.coords);
             document.querySelector('.user-pos').innerText =
                 `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
-               /* ` getLocation(${pos.coords.latitude},  ${pos.coords.longitude})."long_name"` */
+            mapService.initMap(pos.coords.latitude, pos.coords.longitude)
         })
         .catch(err => {
             console.log('err!!!', err);
@@ -56,4 +82,13 @@ function onGetUserPos() {
 function onPanTo() {
     console.log('Panning the Map');
     mapService.panTo(35.6895, 139.6917);
+}
+
+function onGetAddress(ev) {
+    ev.preventDefault()
+    locService.getAddress()
+        .then(res => {
+            // console.log(res);
+            mapService.initMap(res.lat, res.lng)
+        })
 }
