@@ -7,10 +7,15 @@ window.onPanTo = onPanTo;
 window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
 window.onGetAddress = onGetAddress;
+window.onRemoveLoc = onRemoveLoc;
+window.onCopyLocation = onCopyLocation;
+window.renderByStringParam = renderByStringParams;
+window.copyToClipboard = copyToClipboard;
 
 
 
 function onInit() {
+    renderByStringParams()
     onGetLocs()
     mapService.initMap()
         .then(() => {
@@ -27,6 +32,10 @@ function getPosition() {
     })
 }
 
+function onCopyLocation() {
+
+}
+
 function onAddMarker() {
     locService.getAddress()
         .then(res => mapService.addMarker(res))
@@ -41,31 +50,32 @@ function onAddMarker() {
 }
 
 function onGetLocs() {
-    locService.getLocs()
-        .then(locs => {
-            var strHtml = `<table>
-                        <tbody>`
-            console.log(locs);
-            console.log('Locations:', locs)
-            locs.map(loc =>
-                strHtml += `
-                <tr>
-                    <td class="location-name">${loc.name}</td>
-                    <td class="location-Address">${loc.address}  </td>
-                    <td><button onclick="onPanTo(${loc.lat},${loc.lng})" class="btn-pan">Go</button></td>
-                    <td><button class="delete-place" onclick="onRemoveLoc(${loc.id})">X</button></td>
-                    </td>
-                </tr>
-                `
-            )
-            strHtml += `</tbody>
-            </table>`
-
-            locs.forEach(loc => mapService.addMarker({ lat: loc.lat, lng: loc.lng }))
-            document.querySelector('.location-list').innerHTML = strHtml
-        })
+    locService.renderLocations()
 }
 
+function renderByStringParams() {
+    const queryStringParams = new URLSearchParams(window.location.search)
+
+
+    const locationBy = {
+        lat: +queryStringParams.get('lat') || 0,
+        lng: +queryStringParams.get('lng') || 0,
+    }
+    mapService.initMap(locationBy.lat, locationBy.lng)
+    // copyToClipboard(`https://yuvalshmukler.github.io/Travel-tip?lat=${locationBy.lat}&lng=${locationBy.lng}`)
+
+}
+
+function copyToClipboard(text) {
+    console.log(text);
+    if (window.clipboardData) { // Internet Explorer
+        window.clipboardData.setData("Text", text);
+    } else {
+        unsafeWindow.netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+        const clipboardHelper = Components.classes["@mozilla.org/widget/clipboardhelper;1"].getService(Components.interfaces.nsIClipboardHelper);
+        clipboardHelper.copyString(text);
+    }
+}
 
 
 function onGetUserPos() {
@@ -79,9 +89,14 @@ function onGetUserPos() {
             console.log('err!!!', err);
         })
 }
-function onPanTo() {
+function onPanTo(lat, lng) {
     console.log('Panning the Map');
-    mapService.panTo(35.6895, 139.6917);
+    mapService.panTo(lat, lng);
+}
+
+function onRemoveLoc(id) {
+    console.log(id);
+    locService.removeLoc(id)
 }
 
 function onGetAddress(ev) {

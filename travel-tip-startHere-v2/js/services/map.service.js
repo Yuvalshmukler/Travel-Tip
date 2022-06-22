@@ -1,4 +1,6 @@
 import { locService } from '../services/loc.service.js'
+import { utilService } from '../services/utils.js'
+
 
 const API_MAP_KEY = 'AIzaSyAopS6SI7oP3X0FuYHfJb_K8nEmU5jQbmI'
 
@@ -36,6 +38,14 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                         const placeLng = mapsMouseEvent.latLng.lng()
                         const newPlace = { pos: { lat: placeLat, lng: placeLng }, name: locName }
                         locService.addNewLoc(newPlace)
+                        locService.getLocs()
+                        var marker = new google.maps.Marker({
+                            position: { lat: placeLat, lng: placeLng },
+                            map: gMap,
+                            title: 'Hello World!'
+                        });
+                        locService.renderLocations()
+                        utilService.setQueryStringParams({ lat: placeLat, lng: placeLng })
                     })
                     .catch(
                         Swal.fire({
@@ -45,6 +55,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                             footer: 'You should enter a name!'
                         })
                     )
+                locService.getLocs()
 
             })
         })
@@ -69,6 +80,7 @@ function addMarker(loc) {
 function panTo(lat, lng) {
     var laLatLng = new google.maps.LatLng(lat, lng);
     gMap.panTo(laLatLng);
+    utilService.setQueryStringParams({ lat: lat, lng: lng })
 }
 
 
