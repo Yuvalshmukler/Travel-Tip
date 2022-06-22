@@ -1,15 +1,16 @@
-
+import { locService } from '../services/loc.service.js'
 
 export const mapService = {
     initMap,
     addMarker,
-    panTo
+    panTo,
+
 }
 
 var gMap;
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
-    console.log('InitMap');
+    // console.log('InitMap');
     return _connectGoogleApi()
         .then(() => {
             console.log('google available');
@@ -18,8 +19,40 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 center: { lat, lng },
                 zoom: 15
             })
-            console.log('Map!', gMap);
+            gMap.addListener("click", (mapsMouseEvent) => {
+                var locName = prompt('Name?')
+                getLocName(locName)
+                    .then(res => {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: `Your location ${res} has been saved`,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    })
+                    .catch(
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!',
+                            footer: 'You should enter a name!'
+                        })
+                    )
+                const placeLat = mapsMouseEvent.latLng.lat()
+                const placeLng = mapsMouseEvent.latLng.lng()
+                const newPlace = { pos: { lat: placeLat, lng: placeLng }, name: locName }
+                locService.addNewLoc(newPlace)
+            })
         })
+
+}
+
+function getLocName(name) {
+    return new Promise((resolve, reject) => {
+        if (name) resolve(name)
+        else reject('Oops')
+    })
 }
 
 function addMarker(loc) {
@@ -40,9 +73,8 @@ function panTo(lat, lng) {
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-    // const API_KEY = 'AIzaSyAopS6SI7oP3X0FuYHfJb_K8nEmU5jQbmI' 
-    const API_KEY = '' 
-    var elGoogleApi = document.createElement('script')
+    const API_KEY = 'AIzaSyAopS6SI7oP3X0FuYHfJb_K8nEmU5jQbmI';
+    var elGoogleApi = document.createElement('script');
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
     elGoogleApi.async = true;
     document.body.append(elGoogleApi);
