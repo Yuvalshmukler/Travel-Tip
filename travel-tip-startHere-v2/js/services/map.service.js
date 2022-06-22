@@ -54,8 +54,9 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 function getLocation(lat, lng) {
     return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${API_KEY }`)
     .then(res => {
-        console.log('res',res.config.url);
-        return res.config
+        console.log('res',res.config)
+        .then(res => {
+        })
     }) 
 }
 function getLocName(name) {
