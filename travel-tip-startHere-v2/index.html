@@ -11,20 +11,20 @@
 <body>
     <header class="main-header flex space-between main-layout">
         <h1>TravelTip</h1>
-        <div class="main-nav flex align-items">
+        <form onsubmit="onGetAddress(event)" class="main-nav flex align-items">
             <input type="text" placeholder="Enter Location">
-            <button onclick="onEnterLocation()">GO</button> <!-- for later -->
-            <button onclick="onGetUserPos()" class="btn-user-pos">My Location</button>
-        </div>
+            <button>GO</button> 
+        </form >
     </header>
     <div class="location-options flex space-between main-layout align-items">
         <p>
             Location:<span class="user-pos"></span>
         </p>
         <section>
+            <button onclick="onGetUserPos()" class="btn-user-pos">My Location</button>
             <button onclick="onCopyLocation()">Copy Location</button>
-            <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button>
-            <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
+            <button onclick="onAddMarker()" class="btn-add-marker">Add Marker</button>
+            <button onclick="onGetLocs()" class="btn-get-locs">Show Locations</button>
         </section>
     </div>
     <main class="main-container main-layout flex">

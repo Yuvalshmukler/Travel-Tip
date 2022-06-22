@@ -1,5 +1,6 @@
 import { locService } from '../services/loc.service.js'
-const API_KEY = 'AIzaSyAopS6SI7oP3X0FuYHfJb_K8nEmU5jQbmI';
+
+const API_MAP_KEY = 'AIzaSyAopS6SI7oP3X0FuYHfJb_K8nEmU5jQbmI'
 
 export const mapService = {
     initMap,
@@ -12,7 +13,6 @@ var gMap;
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
     // console.log('InitMap');
-    getLocation(lat, lng)
     return _connectGoogleApi()
         .then(() => {
             console.log('google available');
@@ -23,7 +23,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             })
             gMap.addListener("click", (mapsMouseEvent) => {
                 var locName = prompt('Name?')
-                getLocName(locName)
+                locService.getLocName(locName)
                     .then(res => {
                         Swal.fire({
                             position: 'center',
@@ -32,6 +32,10 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                             showConfirmButton: false,
                             timer: 1500
                         })
+                        const placeLat = mapsMouseEvent.latLng.lat()
+                        const placeLng = mapsMouseEvent.latLng.lng()
+                        const newPlace = { pos: { lat: placeLat, lng: placeLng }, name: locName }
+                        locService.addNewLoc(newPlace)
                     })
                     .catch(
                         Swal.fire({
@@ -41,29 +45,17 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                             footer: 'You should enter a name!'
                         })
                     )
-                if (!locName) return
-                const placeLat = mapsMouseEvent.latLng.lat()
-                const placeLng = mapsMouseEvent.latLng.lng()
-                const newPlace = { pos: { lat: placeLat, lng: placeLng }, name: locName }
-                locService.addNewLoc(newPlace)
+
             })
         })
-        
+
 }
 
-function getLocation(lat, lng) {
-    return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${API_KEY }`)
-    .then(res => {
-        console.log('res',res.config.url);
-        return res.config
-    }) 
-}
-function getLocName(name) {
-    return new Promise((resolve, reject) => {
-        if (name) resolve(name)
-        else reject('Oops')
-    })
-}
+
+
+
+
+
 
 function addMarker(loc) {
     var marker = new google.maps.Marker({
@@ -84,7 +76,7 @@ function panTo(lat, lng) {
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
     var elGoogleApi = document.createElement('script');
-    elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
+    elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_MAP_KEY}`;
     elGoogleApi.async = true;
     document.body.append(elGoogleApi);
 
